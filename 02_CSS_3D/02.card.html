@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .world {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80vw;
+      height: 80vh;
+      background: yellow;
+      perspective: 500px; 
+      /* 
+      여기에 perspective를 넣었어도 실제로 회전하는 카드 모양인 .card-side 를 감싸는 .card가 중간에 끼어 있어서
+      .card-side에 실제로 3d 효과가 못미치게 보인다. (뭔가 제대로 작동을 안 한다.)
+      그래서 .card에 transform-style : preserve-3d;을 준다.
+      */
+    }
+    .card {
+      position: relative;
+      width: 100px;
+      height: 150px;
+      margin: 1em;
+      transform: rotateY(0deg); /* 0도 써주는게 좋다. 이게 있으면 브라우저가 rotate로 돌릴 준비를 한다고 한다. 성능에 있어서 더 낫다고 함. */
+      transition: 1s;
+      transform-style : preserve-3d; /* preserve-3d는 엘리먼트 레벨을 뚫고 안쪽까지 적용되게 하는 기능이다. */
+      transform-origin: left;
+    }
+    .card-side {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 0.5em; 
+      font-size: 1.5rem;
+      backface-visibility: hidden; /* 카드 뒷 면이 안보이게 해 준다. */ 
+    }
+    .card-side-front {
+      z-index: 1; /* 앞면이 먼저 보여야 하므로.. */
+      background: white;
+    }
+    .card-side-back {
+      background: red;
+      transform: rotateY(180deg); /* 글씨가 써 있는 쪽이 바깥으로 보이게 하기 위해서 뒤집었다.. */
+    }
+    .world:hover .card{
+      transform: rotateY(-180deg);
+    }
+
+  </style>
+  
+  <!-- 
+    
+  ============================== 순서 정리 ==============================
+  
+  1. .world 안에 .card-side를 감싸는 .card를 만들고, .card-side는 position: absolute로 위치시킨다.
+
+  2. .world에 hover되었을 때 .card를 y축 기준으로 180도 돌리기
+  ==========> .world:hover .card {transform: rotateY(180deg);}
+
+  3. .world에 perspective 넣기
+  ==========> .world {perspective: 500px;}
+
+  4. 카드 앞, 뒷면 만들어주기
+    1) 뒷면의 글씨가 써 있는 바깥으로 보이게 하기 위해서 뒤집기 
+    ==========> .card-side-back {transform: rotateY(180deg);}
+
+    2) 앞 면이 뒷 면보다 먼저 보이게 해 주기
+    ==========> .card-side-front {z-index: 1;}
+  
+  5. .card-side를 감싸는 .card에 효과 주기
+  ==========> .card {transform-style : preserve-3d;}
+
+  6. 카드 뒷 면 안보이게 하기
+  ==========> .card-side {backface-visibility: hidden;}
+
+  7. 문 처럼 보이게 하려면 
+    1) transform-origin 넣어서 회전축 위치를 바꿔준다
+    ==========> .card {transform-origin: left;}
+
+    2) 회전 각도를 바꾼다
+    ==========> .world:hover .card {transform: rotateY(-180deg);}
+
+  -->
+</head>
+<body>
+  <div class="world">
+    <div class="card">
+      <div class="card-side card-side-front">F</div>
+      <div class="card-side card-side-back">B</div>
+    </div>
+  </div>
+</body>
+</html>

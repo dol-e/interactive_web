@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+
+    /* 크로스 브라우징이 가능하게 수정해보기 - 익스플로러 용 */
+
+    .world {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80vw;
+      height: 80vh;
+      background: yellow;
+      perspective: 500px; 
+    }
+    .card-side {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 100px;
+      height: 150px;
+      margin: -75px 0 0 -50px; 
+      /* 
+      transform을 rotate로 사용할 것이기에 겹쳐서 쓰지 않고 margin으로 중앙정렬을 시켰다.
+      너비의 반만큼을 왼쪽으로 당기고, 높이의 반만큼 위로 당긴다.  
+      */
+      border-radius: 0.5em; 
+      font-size: 1.5rem;
+      -webkit-backface-visibility: hidden; /* 사파리 */
+      backface-visibility: hidden; /* 표준속성. 크롬 */
+      transition: 1s;
+    }
+    .card-side-front {
+      z-index: 1; 
+      background: white;
+    }
+    .card-side-back {
+      background: red;
+      transform: rotateY(180deg); 
+    }
+    .world:hover .card-side-front {
+      transform: rotateY(180deg);
+    }
+    .world:hover .card-side-back {
+      transform: rotateY(360deg);
+    }
+
+  </style>
+
+<!-- 
+  
+======================== 크로스 브라우징이 가능하게 수정해보기 - 익스플로러 용 ======================== 
+
+* 우선 IE에서는 transform-style : preserve-3d;을 쓸 수 없다.
+preserve-3d는 엘리먼트 레벨을 뚫고 안쪽까지 적용되게 하는 기능인데, 이걸 못 쓰니까 card로 묶어서 돌리는 방법을 포기하고,
+앞면과 뒷면을 각각 돌리는 방법을 택한다.
+
+앞면은 0도에서 180도로 돌고
+뒷면은 (글씨가 쓰여진 면이 보이게 하려고 180도 뒤집어진 상태이므로) 180도에서 360도로 돈다.
+
+-> 그럼 애초에 뒷면은 안돌리고 가만 두면 안되나? -> 뒷면 안돌리고 실험해보니까, 앞면이 돌아가는 동안 뒷면이 안움직이고 가만히 있는거니까 뒷면도 꼭 같이 돌려야 함.. ㅎㅎ 
+
+-->
+</head>
+<body>
+  <div class="world">
+    <div class="card-side card-side-front">F</div>
+    <div class="card-side card-side-back">B</div>
+  </div>
+</body>
+</html>

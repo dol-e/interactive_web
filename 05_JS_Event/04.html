@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이벤트 위임</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="stage">
+    <div class="ilbuni a"></div>
+    <div class="ilbuni b"></div>
+    <div class="ilbuni c"></div>
+  </div>
+  <script>
+  (function(){
+
+    /************************************** 이벤트 위임 *************************************/ 
+
+    const stage = document.querySelector(".stage");
+
+    function clickHandler(e) {
+
+      // console.log(this) // <div class="stage">...</div>
+      // console.log(e.target) // 내가 정말 클릭한 객체가 나온다.
+      
+      // stage.removeChild(e.target); 
+      // 위와 같이 쓰면, 일부니 바깥인데 stage인 부분(노란배경)을 클릭하게 되면 오류가 뜬다. 왜냐하면 그렇게 되면 e.target이 stage인데, stage가 자식인 stage를 삭제하라는 의미이므로, stage의 자식은 stage가 아니므로 콘솔창에서 오류가 남.
+      // 화면상에서 다시 캐릭터를 클릭했을 때는 잘 작동을 하지만, 어쨌든 콘솔에서 오류가 나니까 수정할 필요가 있다.
+      // 그래서 아래와 같이 if문을 사용해서 조건문을 생성해야 한다.
+
+
+      if(e.target.classList.contains('ilbuni')) { // e.target의 클래스에 ilbuni가 있다면
+        stage.removeChild(e.target);
+      } 
+      
+    }
+
+    stage.addEventListener('click', clickHandler);
+
+  })();
+  </script>
+</body>
+</html>

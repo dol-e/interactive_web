@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이벤트 위임 보강 2 - 동적으로 생성된 경우</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <style>
+    .menu {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80vw;
+      height: 30vw;
+      background: #eee;
+      margin: 0 auto;
+      margin-top: 100px;
+    }
+    .menu-btn {
+      border: 0;
+      width: 160px;
+      height: 80px;
+      background: #FFEA11;
+      cursor: pointer;
+      border: 5px solid #fff;
+      border-radius: 20px;
+      margin-right: 20px;
+    }
+    .menu-btn .icon {
+      height: 35px;
+    }
+  </style>
+</head>
+<body>
+  <div class="menu">
+    
+  </div>
+  <script>
+  /************************************** 이벤트 위임 보강 2 - 동적으로 생성된 경우 *************************************/ 
+
+  (function(){
+
+    const menu = document.querySelector(".menu");
+
+    function clickHandler(e){
+
+      let elem = e.target;
+
+      while(!elem.classList.contains('menu-btn')) { 
+        elem = elem.parentNode;
+
+        if(elem.nodeName =="BODY") {
+          elem = null;
+          return;
+        }
+
+      }
+      console.log(elem.dataset.value)
+      
+    }
+
+    menu.addEventListener('click', clickHandler);
+
+
+    window.addEventListener('click', () => {
+      const htmlStr = `
+        <button class="menu-btn" data-value="1">
+          <img class="icon" src="images/ilbuni_1.png" alt="">
+          <span class="btn-label">일분이 1</span>
+        </button>
+        <button class="menu-btn" data-value="2">
+          <img class="icon" src="images/ilbuni_2.png" alt="">
+          <span class="btn-label">일분이 2</span>
+        </button>
+        <button class="menu-btn" data-value="3">
+          <img class="icon" src="images/ilbuni_3.png" alt="">
+          <span class="btn-label">일분이 3 
+            <span style="display: block">span자식</span>
+          </span>
+        </button>
+      `;
+      menu.innerHTML = htmlStr;
+    });
+
+    /*
+    
+    위와 같이 동적으로 생성된 경우에는 이벤트 위임을 쓴다.
+
+    이벤트위임을 쓰지 않는다면, menu-btn에 이벤트를 걸어주는 방식으로 하게 되는데,
+    menu-btn이 아직 있지도 않은데 menu-btn에 이벤트를 걸어주면 안 된다.
+    querySelectorAll로 menu-btn을 선택하면, undefined라고 뜬다. 그래서 아예 addEventListener가 작동도 안 함.
+
+    */
+
+  })();
+
+  </script>
+</body>
+</html>

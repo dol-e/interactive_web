@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animation</title>
+  <style>
+    body{background: #222;}
+    @keyframes spaceship-ani {
+      to {
+        background-position: -2550px 0;
+        /* 
+        본래 0px 0px 의 자리에 있던 배경이미지가 -2550px 0px로 이동하는 것이다.
+        y축은 그대로 있고 x축 왼쪽으로 이미지가 확 당겨지는 것이다.
+        */
+      }
+    }
+
+    /*
+    키프레임 관련
+    - 애니메이션 시작할 때 원래 자리에서 시작하면 굳이 0% 또는 from을 써줄 필요가 없다.
+    - 0% 와 100%을 from과 to 라고 써도 된다.
+
+    gif를 쓰면 편한데 왜 이걸 쓰지?
+    gif의 단점 
+    - 알파채널이라서 반투명을 지원 안한다.
+    - 테두리에 안티엘리어싱으로 반투명으로 처리된 부분들이 반투명으로 안나온다.
+    - 테두리가 깨져서 나온다.
+    - 애니메이션을 사용하면 여러가지 제어(거꾸로 돌아가기, 몇 번 재생하기)가 가능한테, gif는 그게 안 된다.
+
+    */
+
+    .spaceship{
+      width: 150px;
+      height: 150px;
+      background: url(images/sprite_spaceship.png) no-repeat 0 0 / auto 150px;
+      animation: spaceship-ani 2s infinite steps(17);
+      /* 
+      animation-timing-function: steps(17); 
+      17단계로 나눠서 애니메이션이 되게 보여지는 것이다.
+      이걸 쓰면 자연스럽게 보인다.
+      */
+    }
+
+    /* 
+    배경 이미지 크기
+    - 고해상도 이미지 지원을 위해 원본은 300px * 5100px 이지만 웹에 보여지는 크기는 150px * 2550px 것이다.
+
+    배경 이미지 크기 넣을 때 팁
+    - 가로, 세로 다 넣을 필요 없다
+    - 가로와 세로 중 하나만 넣고 나머지는 auto로 넣으면 된다
+    - 이 경우에는 cover로 넣어도 된다.
+    */
+   
+  </style>
+</head>
+<body>
+  <div class="spaceship"></div>
+</body>
+</html>

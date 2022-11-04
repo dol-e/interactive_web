@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+
+    .world {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80vw;
+      height: 80vh;
+      background: yellow;
+      /* perspective: 500px; 
+      상위 박스에 이렇게 써 주면 카드3개가 균일하게 회전된 걸로 보이지 않게 된다. 
+      오른쪽에 사람 눈이 있고 거기서 보는 것 처럼 그렇게 보여짐..
+      가장 오른쪽에 있는 카드가 가장 가까이 있고, 가장 왼쪽에 있는 카드는 가장 멀리 있는 것 처럼 보인다.
+      */
+    }
+    .card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 150px;
+      margin: 1em;
+      border-radius: 0.5em; 
+      font-size: 1.5rem;
+      background: red;
+      transform: perspective(500px) rotateY(40deg); 
+      /*
+      카드의 transform 안에 perspective을 넣어주면 카드3개가 균일하게 회전된 걸로 보임..
+      */
+    }
+
+    /* 
+    =========== perspective ===========
+    - transform: rotateY 또는 rotateX, rotateZ를 썼는데 perspective 속성을 안써주면 원근감이 안느껴진다.
+    - perspective는 뷰포트 단위로 해도 되고 px로 써도 된다.
+    - perspective 수치의 의미: 눈에서의 거리 (진짜 실제 거리는 아니고 느낌이 그렇다는 것.. )
+    - 같은 각도로 돌아갔더라도, 사람 눈 바로 앞에서 돌아간 것은 입체적이고 극적으로 보이지만
+    아주 멀리 있는 것을 생각해보면 그 원근감이 흐려보인다.
+    - 어떤 사물이 y축 기준으로 입체적으로 회전되었지만 멀리서 보면 돌아간걸로 안보이고 평면이미지라고 착각하는 경우를 상상해보면 될 듯?
+    - 숫자가 작을수록 내 눈 앞에서 회전이 일어난 것 처럼 보이기 때문에 더 극적으로 보이게 된다.
+
+
+
+    =========== rem과 em 설명 ===========
+    em 은 상위 요소 or 해당 요소의 폰트사이즈 크기에 비례함. 
+    여기서는 font-size: 1.5 rem 이니까 1.5 rem를 기준으로 해서 그것의 0.5배가 된다.
+    html 기본 폰트가 16px이므로 1.5rem은 24px이고, 0.5em 은 24px * 0.5 = 12px이다. 
+    font-size에 border-radius 역시 비례하도록 하고 싶으면 em을 쓰면 된다.
+    현재 엘리먼트의 폰트사이즈를 기준으로 상대적인 비율을 결정하겠다고 하면 em을 쓴다.
+
+    rem과 em의 의도가 다르다. 
+    무엇이 맞고 틀리고가 아니로, 디자인의 의도를 정확히 반영하면 된다.
+    */
+  </style>
+</head>
+<body>
+  <div class="world">
+    <div class="card">CARD</div>
+    <div class="card">CARD</div>
+    <div class="card">CARD</div>
+  </div>
+</body>
+</html>

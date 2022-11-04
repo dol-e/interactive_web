@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>this와 이벤트 객체</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <style>
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    .characters {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background: #fff000;
+    }
+    .ilbuni {
+        width: 100px;
+        cursor: pointer;
+    }
+    .characters .ilbuni {
+        display: inline-block;
+    }
+    .special {
+        border: 10px dashed red;
+    }
+  </style>
+</head>
+<body>
+  <div class="characters">
+    <div class="ilbuni a">
+      <img src="images/ilbuni_0.png" alt="">
+    </div>
+    <div class="ilbuni b">
+      <img src="images/ilbuni_1.png" alt="">
+    </div>
+    <div class="ilbuni c">
+      <img src="images/ilbuni_2.png" alt="">
+    </div>
+    <div class="ilbuni d">
+      <img src="images/ilbuni_3.png" alt="">
+    </div>
+  </div>
+  <script>
+    /************************************** this와 이벤트 객체 *************************************/ 
+
+    (function() {
+
+      const characters = document.querySelector('.characters');
+    
+
+      const clickHandler = function(e) {
+        // console.log(this); // <div class="characters">...</div>
+        // console.log(e); // PointerEvent 가 나온다. 이벤트 객체. 지금 발생한 이벤트에 대한 정보들을 담고 있는 객체
+        console.log(e.currentTarget); // this와 결과가 같다.
+        console.log(e.target); // 내가 정말 클릭한 객체가 나온다.
+      }
+
+      characters.addEventListener('click', clickHandler);
+      // 이벤트리스너 안에서 this는 이벤트가 등록되어 있는 객체인 characters이다.
+
+    })();
+    
+
+  </script>
+</body>
+</html>

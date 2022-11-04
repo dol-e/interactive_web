@@ -1,0 +1,44 @@
+.stage{
+  overflow: hidden;
+  position: relative;
+  width: 100vw;
+  height: 75vw;
+  background: #fff000;
+}
+.ilbuni{
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-image: url(../images/ilbuni_0.png);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  animation: moving infinite alternate;
+}
+@keyframes moving {
+  from{
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(90vw);
+  }
+}
+
+.ilbuni.a {
+  left: 5%;
+  bottom: 5%;
+  background-image: url(../images/ilbuni_0.png);
+  animation-duration: 3s;
+}
+.ilbuni.b {
+  left: 10%;
+  bottom: 3%;
+  background-image: url(../images/ilbuni_1.png);
+  animation-duration: 4s;
+}
+.ilbuni.c {
+  left: 7%;
+  bottom: 7%;
+  background-image: url(../images/ilbuni_2.png);
+  animation-duration: 5s;
+}

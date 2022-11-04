@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Transform</title>
+  <style>
+    .box-container {
+      display: flex;
+    }
+    .box {
+      width: 100px;
+      height: 100px;
+      border: 2px solid black;
+      background: rgba(255,255,0,0.7);
+      transition: 1s;
+      /* transition: 1s 0.5s;  뒤에 0.5s 라고 쓰면 transition-delay 이다. */
+
+      /* 
+
+      ======================= transition의 속성들 =======================
+
+
+      ======= 디폴트 =======
+      개발자도구에서 transition 옆의 화살표 눌러보면 디폴트로 되어있는 자세한 속성명과 값을 확인할 수 있다.
+
+      transition-property: all;
+      transition-duration: 1s; => 재생속도
+      transition-timing-function: ease; => ease는 가속도. 보라색 버튼 누르면 cubic-bezier곡선을 확인해 볼 수 있다.
+      transition-delay: 0s; => 지연시간
+
+
+      
+
+      ======= linear =======
+      transition: 1s linear; => 기본값인 ease에 비해서 느리고 딱딱한 느낌. 가속도가 아니라 등속도이기 때문
+
+
+      ======= cubic-bezier곡선 =======
+      가로축이 시간 세로축이 위치 
+      기본값인 ease는 처음에 확 움직였다가 나중에는 확 천천히 움직이는 흐름이다.
+      개발자도구에서 cubic-bezier곡선을 테스트해보고 아래와 같이 넣을 수 있다
+
+      transition: 0.5s cubic-bezier(0.32, -0.01, 0.69, 1.5);
+
+      */
+
+    }
+
+    .box-1:hover {
+      width: 200px;
+      height: 200px;
+    }
+    .box-2:hover {
+      transform: scale(1.5);
+      background: red;
+
+      /*
+
+      ======================= transform의 여러가지 속성들 =======================
+
+      transform:scale을 쓴 것과 width, height를 조절한 것을 비교해보면 확연히 다른 것을 알 수 있다. 브라우저가 위치값을 알아서 계산한다. 
+
+      transform:scale(2) rotate(15deg);
+      transform:skew(30deg);
+      transform:skewY(-30deg);
+      transform: translate(30px, 10px);
+
+      ======================= transform-origin 속성 =======================
+      transform-origin: left top;
+      transform-origin: 0 0; => left top과 같다
+      transform-origin: 100% 100%; => right bottom과 같다 
+      
+      */
+
+    }
+  </style>
+</head>
+<body>
+  <!-- 
+    position: absolute로 left, top값 이용하는 것보다 CSS Transform 이용하는게 훨씬 빠르다. 
+    그 이유는 하드웨어 가속을 이용하기 때문. GPU를 쓴다는 것. 
+   -->
+  <h1>CSS Transform</h1>
+  <p>
+    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+  </p>
+
+  <div class="box-container" style="margin-bottom:50px">
+    <div class="box box-1">A</div>
+    <div class="box box-1">B</div>
+    <div class="box box-1">C</div>
+    <div class="box box-1">D</div>
+    <div class="box box-1">E</div>
+  </div>
+
+  <div class="box-container">
+    <div class="box box-2">A</div>
+    <div class="box box-2">B</div>
+    <div class="box box-2">C</div>
+    <div class="box box-2">D</div>
+    <div class="box box-2">E</div>
+  </div>
+
+  <p>
+    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+  </p>
+  
+</body>
+</html>

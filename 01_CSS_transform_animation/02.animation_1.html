@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animation</title>
+  <style>
+
+  /*  
+    키프레임: 애니메이션에서 방향전환이 있는 지점 
+    트랜지션에는 중간에 변화가 있는 지점이 없다.
+    그것이 애니메이션과 트랜지션의 가장 큰 차이
+  */
+
+
+    @keyframes sample-ani {
+      0% {
+        transform: translate(0, 0);
+      }
+      50% {
+        transform: translate(300px, 0);
+      }
+      100% {
+        transform: translate(400px, 500px);
+      }
+
+    }
+
+    .box{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 100px;
+      border: 2px solid #000;
+      background: #fff000;
+      animation: sample-ani 3s linear forwards;
+      /* animation: sample-ani 3s linear infinite alternate; */
+    }
+    
+    .box:hover{ /* 마우스 올리면 일시정지 */
+      animation-play-state: paused; 
+    }
+
+      /* 
+
+      ======= 디폴트 =======
+      animation-duration: 3s;
+      animation-timing-function: ease;   <= 디폴트가 ease
+      animation-delay: 0s;
+      animation-iteration-count: 1;    <= 반복횟수: 1번
+      animation-direction: normal;
+      animation-fill-mode: none;
+      animation-play-state: running;   <= 자동재생
+      animation-name: sample-ani;
+
+      ======= 속성설명 =======
+      - animation-iteration-count: infinite;      <= 반복횟수: 무한반복
+      - animation-direction: alternate;    <= 방향: 왔다갔다
+      - animation-direction: reverse     <= 방향: 거꾸로 시작
+      - animation-direction: alternate-reverse     <= 방향: 거꾸로 시작해서 왔다갔다
+      - animation-fill-mode: forwards       <= 끝난 시점에 그대로 머무르게 하기
+      - animation-play-state: paused;       <= 일시정지
+
+      */
+
+    
+  </style>
+  
+  <!-- 
+
+    ======= css flex 간단 설명 =======
+    display: flex; (디폴트가 inline처럼 가로방향으로 정렬됨)
+    flex-direction: row; (디폴트. 가로방향)
+    align-items: center; (수직축에서 아이템들을 가운데 정렬)
+    justify-content: center; (메인축에서 아이템들이 가운데 정렬)
+
+    ***** row일 때는 메인축이 가로축, 교차축(수직축)이 세로축
+    ***** column일 때는 메인축이 세로축, 교차축(수직축)이 가로축
+
+
+
+    ======= BOX라는 글씨 정렬 해설 =======
+    align-items: center; 를 써서 세로로 가운데 정렬
+    justify-content: center; 를 써서 가로로 가운데 정렬
+    을 시킨 것이다.
+
+  -->
+</head>
+<body>
+  <h1>Animation</h1>
+  <div class="box">BOX</div>
+</body>
+</html>
