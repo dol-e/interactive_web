@@ -14,7 +14,7 @@
 			width: 100vw;
 			height: 100vh;
 			background: #333;
-			/* perspective: 800px; */
+			/* perspective: 800px; 이렇게 하면 세 개의 문이 균일하게 회전된 걸로 보이지 않게 된다.  */
 		}
 		.door {
 			position: relative;
@@ -53,9 +53,6 @@
 		.door:nth-child(2) .ilbuni { background-image: url(images/ilbuni_1.png); }
 		.door:nth-child(3) .ilbuni { background-image: url(images/ilbuni_2.png); }
 
-		.door:hover .ilbuni {
-			transform: translate3d(0, 0, 0);
-		}
 		.door-body {
 			position: absolute;
 			left: 0;
@@ -70,7 +67,11 @@
 		.door:nth-child(2) .door-body { background: rgba(0, 255, 0, 0.7); }
 		.door:nth-child(3) .door-body { background: rgba(0, 0, 255, 0.7); }
 
-		.door-body:hover {
+		.door.door-opened .ilbuni {
+			transform: translate3d(0, 0, 0);
+		}
+
+		.door.door-opened .door-body {
 			transform: perspective(800px) rotateY(-110deg);
 			/* 
 			rotateY(110deg)는 안쪽으로 밀면서 열리는 문이다. (시계 반대 방향으로 회전한다.)
@@ -110,7 +111,43 @@
 	</div>
 
 	<script>
+		(function(){
 
+			const stageElem = document.querySelector(".stage");
+
+			let currentItem; // 현재 활성화된 아이템을 저장
+
+			function doorHandler(e){
+				// 이벤트핸들러로 함수가 실행되었을 때 첫 번째 매개변수 자리에 이벤트객체가 들어온다.
+				const targetElem = e.target;
+				console.log(targetElem);
+
+				// const currentItem = document.querySelector(".door-opened"); 
+				// 이렇게 돔에 접근하는 것은 연산속도가 가장 느린 방식 중 하나이다.
+				// 구체적인 클래스에 종속된 것도 좋지 않고, 조금 더 범용적이고 빠른 연산으로 바꿀 것이다.
+				// 이 방식 대신 변수를 사용할 것이다.
+
+
+				if(currentItem) {
+					currentItem.classList.remove("door-opened");
+				}
+				
+
+				if(targetElem.classList.contains("door-body")){ // 클릭한 요소가 door-body일 때만 실행하시오.
+					targetElem.parentNode.classList.add("door-opened");
+					
+					// door-body를 클릭했을 때 door-body의 부모인 door를 currentItem에 넣어줌으로서 값이 갱신이 된다.
+					currentItem = targetElem.parentNode; 
+				}
+				
+			}
+
+			// stageElem.addEventListener("click", doorHandler, false); // false가 default라서 생략한 것이다.
+			stageElem.addEventListener("click", doorHandler);
+
+
+
+		})();
 	</script>
 </body>
 </html>
