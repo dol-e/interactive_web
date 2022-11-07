@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>객체(Object)</title>
+</head>
+<body>
+
+  <script>
+
+    /* 생성자 함수(constructor) - 객체를 생성하는 함수 */
+    function Person(nickname, age) {
+
+      /* 
+      name은 전역객체인 window가 원래부터 갖고 있던 전역변수다.
+      따라서 name은 객체의 속성(property)으로 사용하지 말아야.. 
+      console.log(name); <- 빈 칸이 나온다
+      console.log(window.name); <- 이거랑 위에 거랑 같다.
+      */
+    
+      console.log(this);
+
+      this.nickname = nickname;
+      this.age = age;
+      this.introduce = function (){ // 속성 중에서 값이 함수인 경우에는 메서드(method)라고 한다.
+      console.log('안녕? 나는 '+this.nickname+'야. 나이는 '+this.age+'살이야.');
+      }
+      
+    }
+
+    // 생성된 개별객체 하나하나를 인스턴스(instance)라고 한다. 
+    var person1 = new Person('일분이','10');
+    var person2 = new Person('이분이','8');
+
+    person1.introduce();
+    person2.introduce();
+
+    // 그런데 위와 같이 쓰게 되면 각각의 인스턴스가 nickname, age, introduce를 개별적으로 갖게 되는 것이고 메모리를 점유하게 된다.
+    // 따라서 비효율적이고 메모리 낭비를 하게 된다.
+
+    // 공통으로 사용하는 메서드인 introduce를 공유하는 형태로 바꿀 것이다.
+
+  </script>
+
+</body>
+</html>

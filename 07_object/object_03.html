@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>객체(Object)</title>
+</head>
+<body>
+
+  <script>
+
+    function Card(num, color){
+      this.num = num;
+      this.color = color;
+    }
+
+    Card.prototype.width = 100;
+    Card.prototype.height = 150;
+
+    const card1 = new Card(1,'green');
+    const card2 = new Card(7,'blue');
+
+    // prototype에 넣으면 자동으로 인스턴스의 속성으로 들어간다.
+    console.log(card1.width); //100
+    console.log(card2.width); //100
+
+
+    /* 다음 페이지에서 눈에 보이게 바꿔볼 것이다. */
+
+  </script>
+
+</body>
+</html>
