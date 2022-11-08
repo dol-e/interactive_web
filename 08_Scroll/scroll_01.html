@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <style>
+    img {
+      max-width: 100%;
+    }
+    .content {
+      /* viewport height */
+      height: 1000vh;
+      padding: 20%;
+      background: yellowgreen;
+    }
+    .output {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      font-size: 2rem;
+      font-weight: 200;
+      background: rgba(0, 0, 0, 0.4);
+    }
+    .output p {
+      color: #fff;
+    }
+    .output span {
+      color: yellow;
+    }
+    .ilbuni {
+      width: 100px;
+      margin: 20px auto;
+      transition: 1s;
+    }
+    .ilbuni.zoom {
+      transform: scale(2);
+    }
+  </style>
+</head>
+<body>
+  <div class="output">
+    <p>output</p>
+    <span></span>
+  </div>
+  <div class="content">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo culpa id ratione alias illum aliquam accusamus deleniti dolores dignissimos, temporibus iste perspiciatis voluptatem repudiandae debitis similique fugiat dolor, doloremque quos mollitia repellendus iure exercitationem molestiae ab! Veritatis harum voluptate enim ducimus amet vitae veniam dignissimos possimus facilis eaque minus similique, vel commodi sed? Sequi distinctio debitis numquam, necessitatibus officiis quam, sed rerum id culpa totam provident repellendus iste, laborum maiores, consequuntur fugiat voluptatibus? Ad, architecto. Ipsam minus quis, ea quas, ex impedit quia distinctio commodi expedita laudantium dolores cum? Quisquam, odit, laboriosam consequuntur expedita optio laudantium. Optio laboriosam, repellendus laborum.
+    </p>
+    <figure class="ilbuni">
+      <img src="images/ilbuni_0.png" alt="일분이">
+    </figure>
+  </div>
+
+  <script>
+    (function(){
+
+      const outputElem = document.querySelector('.output p');
+      const outputSpan= document.querySelector('.output span');
+      const ilbuniElem = document.querySelector('.ilbuni');
+
+      window.addEventListener('scroll', function(){ // 이벤트리스너 함수는 익명함수로 바로 넣었다.
+
+        outputElem.innerHTML = window.pageYOffset; // pageYOffset은 스크롤을 얼마나 했는지 px로 나타내주는 속성
+        outputSpan.innerHTML = ilbuniElem.offsetTop; // offsetTop은 스크롤을 해도 값의 변화가 없다. ilbuni 캐릭터의 첫 위치만 가지고 온다.
+
+        // offsetTop: 가장 가까운 부모요소의 상단에서부터의 픽셀값. 첫 위치만 가지고 온다.
+
+        
+        // 스크롤 되었을 때 ilbuni 캐릭터의 위치를 알려면?
+        // getBoundingClientRect() 함수를 쓴다.
+
+        console.log(ilbuniElem.getBoundingClientRect()); // 콘솔창에서 ilbuni 캐릭터의 left, rifht, top, bottom 값 등을 알 수 있다.
+        // x,y 값이 left, top 값과 같다. 그런데 ie 에서 x,y 속성은 안된다고 한다.
+        // x,y 속성 보다 left, top 속성을 쓰는 것이 안전 (했다? 지금은 ie는 이제는 종료되었기 때문에 상관 없을 듯..)
+        
+
+      },false); // 이벤트 버블링 처리해 주는 false는 default값이기 때문에 생략가능
+
+
+
+
+    })();
+  </script>
+
+</body>
+</html>
