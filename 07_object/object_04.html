@@ -5,6 +5,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>객체(Object)</title>
+  <style>
+    .card {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 150px;
+      border: 2px solid black;
+      border-radius: 10px;
+      font-size: 3rem;
+      font-weight: 900;
+    }
+  </style>
 </head>
 <body>
 
@@ -13,6 +26,7 @@
     function Card(num, color){
       this.num = num;
       this.color = color;
+      this.init();
     }
 
     /*
@@ -22,39 +36,32 @@
     따라서 constrctor의 속성을 Card 생성자 함수로 넣어주어야 한다.
     */
 
-    Card.prototype = { // 이렇게 할 때는 생성자의 셋팅을 card로 따로 해 주어야 한다. 
+    console.log(Card.prototype); // 여기서 보면 prototype객체 안에 constructor라는 속성이 있는 것을 확인할 수 있다.
 
+    Card.prototype = {
+      constructor: Card, // 생성자의 셋팅을 card로 따로 해 주어야 한다. 
+      init: function(){
+        const mainElem = document.createElement('div');
+        mainElem.style.color = this.color;
+        mainElem.innerHTML = this.num;
+        mainElem.classList.add('card');
+        document.body.appendChild(mainElem);
+      }
     };
 
     const card1 = new Card(1,'green');
     const card2 = new Card(7,'blue');
 
-    console.log(card1); // 여기서 확인할 수 있다. 인스턴스의 
+    console.log(card1);
     console.log(card1.__proto__);
+    console.log(Card.prototype); // card1.__proto__ 와 같다.
+
 
     /*
-    헷갈려서 내가 정리
+    생성자함수의 prototype은 인스턴스에서 __proto__라는 속성으로 접근할 수 있다.
+    콘솔창에서 인스턴스를 찍어보면 [[prototype]]이 나오는데 그 밑으로 쭉 내려가다보면 __proto__라는 속성을 발견할 수 있다.
 
-    모든 constructor(생성자) 함수에는 프로토타입객체가 있다.
-    인스턴스들 그 자체에는 프로토타입이 없다.
-    모든 객체,함수,배열은 결국은 Object라는 constructor의 인스턴스들이다!
-    내가 직접 만든 constructor 함수도 마찮가지로 Object라는 constructor의 인스턴스이다!
-
-    따라서 모든 객체, 함수, 배열, constructor 함수의 부모는 Object라는 constructor함수이고, 그에 대응하는 prototype을 가진다.
-
-    생성된 인스턴스는 [[prototype]] 이라는 것을 갖는데, 이 자체가 prototype은 아니다.
-
-    다시 한 번 말하지만 인스턴스는 prototype을 가질 수 없다.
-    인스턴스의 부모가 prototype을 가진다.
-
-    자바스크립트의 모든 객체(즉 모든 인스턴스)는 [[prototype]]을 가지는데 이것은 자바스크립트 내부슬롯 이라고 한다.
-    내부슬롯이 도대체 뭐고, 객체 안에 들어있는 것이 왜 일반적인 속성 모양으로 안 생기고 [[]] 왜 이런 대괄호 두 개 겹쳐놓은 모양으로 생기고, 이건 뭔가 검색해보니.. 너무 깊게 들어가고 어렵다.
-    그냥 어떤 내부로직 정도로 생각해두고..
-
-    인스턴스의 부모의 prototype은 __proto__라는 속성으로 접근할 수 있다.
-    콘솔창에서 [[prototype]] 밑으로 쭉 내려가다보면 __proto__라는 속성을 발견할 수 있다.
-    
-
+    [[prototype]]과 생성자함수의 prototype은 다른 것이다. 인스턴스가 prototype객체를 가지는 것이 아니라  __proto__라는 속성으로 생성자함수의 prototype에 접근하는 것이다.
     */
     
 
