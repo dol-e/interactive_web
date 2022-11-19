@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transition Event</title>
+  <style>
+    .ball {
+      /* 
+      position을 쓰지 않으면 ball의 위치가 body에 있는 margin영향을 받는다. 
+      해결을 하려면 ball에 position을 넣거나, body에 있는 margin을 0으로 만들어준다.
+      */
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 30px;
+      height: 30px;
+      /* margin: -15px 0 0 -15px; */
+      /* 
+      margin을 음수값으로 주는 것은 클릭한 위치에 공의 중앙이 올 수 있게 하는 방법이다.
+      이렇게 하거나 또는 스크립트에서 15씩 값을 빼 줌으로서 조절할 수 있다.
+      */ 
+      border-radius: 50%;
+      background: red;
+      transition: 1s;
+    }
+    .ball.end {
+      background: dodgerblue;
+    }
+  </style>
+</head>
+<body>
+  <div class="ball"></div>
+
+  <script>
+    const ballElem = document.querySelector('.ball');
+
+    window.addEventListener('click', function(e){
+      console.log(e.clientX, e.clientY); // 클릭한 위치의 좌표
+
+      ballElem.style.transform = 'translate('+ (e.clientX - 15) +'px, '+ (e.clientY - 15) +'px)'
+    })
+
+    ballElem.addEventListener('transitionend', function(e){ // transitionend: 트랜지션이 끝날 때 발생하는 이벤트
+      ballElem.classList.add("end");
+      console.log(e.elapsedTime); // transition-duration 이다.
+      console.log(e.propertyName); // 트랜지션이 일어날 때 작동하는 속성이름
+      /*
+      트랜지션이 2번 일어난다.
+      1) 클릭하면 transform: translate 으로 이동한다.
+      2) end 클래스 붙여서 background가 변화한다.
+      */
+    }); 
+
+    /*
+    transitionend: 트랜지션이 끝날 때 발생하는 이벤트
+    transitionstart: 트랜지션이 시작할 때 발생하는 이벤트
+    */
+  </script>
+</body>
+</html>
