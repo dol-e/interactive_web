@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>requestAnimationFrame</title>
+  <style>
+    .btn {
+      font-size: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <button class="btn">취소</button>
+
+  <script>
+    /*
+    setInterval의 단점
+
+    setInterval은 canvas에서 그리거나, 어떤 값을 계속 갱신할 때 많이 쓰이지만,
+    내가 아무리 빠르게 반복을 시키고 싶다고 해도 컴퓨터가 처리할 능력이 되지 않아 부하가 걸리면,
+    버벅이고 처리를 못 하고 프레임 로스가 일어나고 모바일기기의 배터리가 빨리 닳게 된다.
+
+    이러한 단점을 개선한 것이 requestAnimationFrame이다.
+
+    */
+    let timeId;
+    let n = 0;
+    const btn = document.querySelector(".btn");
+
+    function sample(){
+      n++;
+      console.log(n);
+
+      // 반복시킬 함수 안에 아래와 같이 넣어주면 반복이 된다.
+      // 초당 60번을 목표로 반복한다. (1/60초)
+      // sample 함수 안에 requestAnimationFrame를 실행시키면서 또다시 sample 함수를 불러주면서 반복이 되는 것이다.
+      
+      if(n > 200) { // 200보다 커지면 멈춰
+        return;
+      }
+      timeId = requestAnimationFrame(sample);
+    }
+
+    sample();
+
+    // requestAnimationFrame(sample); 이렇게 sample 함수 바깥에 써 주면 한 번만 작동한다.
+
+
+    btn.addEventListener('click', function(){
+      cancelAnimationFrame(timeId); // requestAnimationFrame을 취소한다.
+    });
+
+    
+  </script>
+</body>
+</html>
